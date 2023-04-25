@@ -1,6 +1,77 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
+
+/* General table styles */
+.top10 {
+  width: 20%;
+  max-width: 400px;
+  border-radius: 1;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.top10 th,
+.top10 td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+/* Header row styles */
+.top10 th {
+  background-color: #222;
+  color: #fff;
+  font-weight: bold;
+}
+
+.top10 tr {
+  background-color: #fff;
+}
+
+/* Highlight top 3 rows */
+.top10 #first {
+  background-color: #ffd700;
+}
+
+.top10 #second {
+  background-color: #c0c0c0;
+}
+
+.top10 #third {
+  background-color: #cd7f32;
+}
+
+.checkerboard {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-gap: 1px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #333;
+}
+
+.row {
+  display: contents;
+}
+
+.cell {
+  width: 100%;
+  padding-top: 100%; /* Keep aspect ratio 1:1 */
+  position: relative;
+}
+
+.cell-black,
+.cell-white {
+  background-color: #000;
+}
+
+.cell-white {
+  background-color: rgb(255, 0, 0);
+}
+
 
 .App-logo {
   height: 40vmin;
