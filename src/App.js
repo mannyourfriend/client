@@ -6,14 +6,12 @@ import io from 'socket.io-client';
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 
-const socket = io('http://localhost:5000');
+const socket = io('http://ec2-18-224-82-33.us-east-2.compute.amazonaws.com:5000');
 
 function App() {
     const [board, setBoard] = React.useState(createInitialBoard());
+    const [username, setUsername] = React.useState("");
 
-    // useSocket("move", (move) => {
-    //   setBoard(move.board);
-    // });
 
     const handleMove = (from, to) => {
         const newBoard = movePiece(board, from, to);
@@ -26,67 +24,73 @@ function App() {
 
   return (
     <div className="App">
-      Leaderboard
-      <table className="top10">
-          <th> Username </th>
-          <th> Wins </th>
-          <th> Losses </th>
-          <tr id="first"> 
-              <td> User1 </td>
-              <td> Wins </td>
-              <td> Losses </td>
-          </tr>
-          <tr id="second"> 
-              <td> User2 </td>
-              <td> Wins </td>
-              <td> Losses </td>
-          </tr>
-          <tr id="third"> 
-              <td> User3 </td>
-              <td> Wins </td>
-              <td> Losses </td>
-          </tr>
-          <tr id="fourth"> 
-              <td> User4 </td>
-              <td> Wins </td>
-              <td> Losses </td>
-          </tr>
-          <tr id="fifth">
-              <td> User5 </td>
-              <td> Wins </td>
-              <td> Losses </td>
-          </tr>
-          <tr id="sixth"> 
-              <td> User6 </td>
-              <td> Wins </td>
-              <td> Losses </td>
-          </tr>
-          <tr id="seventh"> 
-              <td> User7 </td>
-              <td> Wins </td>
-              <td> Losses </td>
-          </tr>
-          <tr id="eighth"> 
-              <td> User8 </td>
-              <td> Wins </td>
-              <td> Losses </td>
-          </tr>
-          <tr id="ninth"> 
-              <td> User9 </td>
-              <td> Wins </td>
-              <td> Losses </td>
-          </tr>
-          <tr id="tenth"> 
-              <td> User10 </td>
-              <td> Wins </td>
-              <td> Losses </td>
-          </tr>
-      </table>
-      <LoginForm />
-      <RegisterForm />
-      <div className="checkerboard-container">
-        <Checkerboard boardState={board} onMove={handleMove}/>
-      </div>
+        <div className="interface">
+            <div className = "Leaderboard">
+                Leaderboard
+                <table className="top10">
+                    <th> Username </th>
+                    <th> Wins </th>
+                    <th> Losses </th>
+                    <tr id="first"> 
+                        <td> User1 </td>
+                        <td> Wins </td>
+                        <td> Losses </td>
+                    </tr>
+                    <tr id="second"> 
+                        <td> User2 </td>
+                        <td> Wins </td>
+                        <td> Losses </td>
+                    </tr>
+                    <tr id="third"> 
+                        <td> User3 </td>
+                        <td> Wins </td>
+                        <td> Losses </td>
+                    </tr>
+                    <tr id="fourth"> 
+                        <td> User4 </td>
+                        <td> Wins </td>
+                        <td> Losses </td>
+                    </tr>
+                    <tr id="fifth">
+                        <td> User5 </td>
+                        <td> Wins </td>
+                        <td> Losses </td>
+                    </tr>
+                    <tr id="sixth"> 
+                        <td> User6 </td>
+                        <td> Wins </td>
+                        <td> Losses </td>
+                    </tr>
+                    <tr id="seventh"> 
+                        <td> User7 </td>
+                        <td> Wins </td>
+                        <td> Losses </td>
+                    </tr>
+                    <tr id="eighth"> 
+                        <td> User8 </td>
+                        <td> Wins </td>
+                        <td> Losses </td>
+                    </tr>
+                    <tr id="ninth"> 
+                        <td> User9 </td>
+                        <td> Wins </td>
+                        <td> Losses </td>
+                    </tr>
+                    <tr id="tenth"> 
+                        <td> User10 </td>
+                        <td> Wins </td>
+                        <td> Losses </td>
+                    </tr>
+                </table>
+            </div>
+            <div className="forms">
+                <LoginForm onLogin={setUsername} />
+                <RegisterForm onRegister={setUsername} />
+            </div>
+            <div className="checkerboard-container">
+            <Checkerboard boardState={board} onMove={handleMove}/>
+            </div>
+        </div>
     </div>
   );
 }

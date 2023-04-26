@@ -22,7 +22,6 @@ function Checkerboard({boardState, onMove}) {
     const row = [];
     for (let j = 0; j < cols; j++) {
       const isWhite = i % 2 === j % 2;
-      const cellColor = isWhite ? 'cell-white' : 'cell-black';
 
       const checkerPieceData = boardState[i][j];
       const checkerPiece = checkerPieceData ? (

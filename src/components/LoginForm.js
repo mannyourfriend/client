@@ -1,13 +1,38 @@
 import React, { useState } from 'react';
 
-function LoginForm() {
+function LoginForm({onLogin}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+  
+    if (username==null || password==null) {
+      alert('Please fill in all fields.');
+      return;
+    }
+  
     // Handle login logic here
-    console.log('Login:', username, password);
+    try {
+        const response = await fetch(`/log/${username}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        });
+    
+        if (response.ok) {
+          console.log('Login successful');
+          onLogin(username);
+        } 
+        else {
+          console.error('Login error:', response.status);
+        }
+      } 
+      catch (error) {
+        console.error('Catch Login error:', error);
+      }
   };
 
   return (
