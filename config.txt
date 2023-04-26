@@ -1,0 +1,18 @@
+installation
+express will run on port 5000, open the port on AWS
+
+npm install express
+npm install -D nodemon
+npm install mysql
+
+SQL CONFIG
+
+CREATE DATABASE checkers;
+USE checkers;
+CREATE TABLE users(
+userID mediumint unsigned not null auto_increment,
+username varchar(30) not null,
+numwins tinyint default 0,
+numlosses tinyint default 0,
+primary key (userID) 
+) engine = InnoDB default character set = utf8 collate = utf8_general_ci;
