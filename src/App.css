@@ -57,21 +57,42 @@
   display: contents;
 }
 
-.cell {
+.square {
   width: 100%;
-  padding-top: 100%; /* Keep aspect ratio 1:1 */
+  padding-bottom: 100%; /* Keep aspect ratio 1:1 */
   position: relative;
+  overflow: hidden; /* Hide the overflow content */
 }
 
-.cell-black,
-.cell-white {
-  background-color: #000;
+.square-black {
+  background-color: rgb(182, 100, 1);
 }
 
-.cell-white {
-  background-color: rgb(255, 0, 0);
+.square-white {
+  background-color: rgb(255, 223, 118);
 }
 
+.checker-piece {
+  width: 80%; 
+  height: 80%;
+  border-radius: 20%;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+}
+
+.red {
+  background-color: red;
+}
+
+.black {
+  background-color: black;
+}
+
+.king {
+  border-radius: 100%;
+}
 
 .App-logo {
   height: 40vmin;
