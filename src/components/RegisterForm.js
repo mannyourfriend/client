@@ -5,10 +5,33 @@ function RegisterForm() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+  
+    if (!username || !password) {
+      // Simple validation: Check if all fields are filled
+      alert('Please fill in all fields.');
+      return;
+    }
+  
     // Handle registration logic here
-    console.log('Register:', username, password, email);
+    try {
+      const response = await fetch('http://ec2-18-224-82-33.us-east-2.compute.amazonaws.com:5000/add/' + username, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+  
+      if (response.ok) {
+        console.log('Registration successful');
+      } else {
+        console.error('Registration error:', response.status);
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+    }
   };
 
   return (

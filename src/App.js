@@ -1,19 +1,19 @@
 import React from "react";
 import "./App.css";
 import Checkerboard from "./components/Checkerboard";
-import useSocket from "./useSocket";
+// import useSocket from "./useSocket";
 import io from 'socket.io-client';
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 
-const socket = io('http://localhost:3000');
+const socket = io('http://localhost:5000');
 
 function App() {
     const [board, setBoard] = React.useState(createInitialBoard());
 
-    useSocket("move", (move) => {
-      setBoard(move.board);
-    });
+    // useSocket("move", (move) => {
+    //   setBoard(move.board);
+    // });
 
     const handleMove = (from, to) => {
         const newBoard = movePiece(board, from, to);
