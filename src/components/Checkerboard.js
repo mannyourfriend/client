@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import CheckerPiece from './Checkerpiece.js';
 
-function Checkerboard({boardState, onMove}) {
+function Checkerboard({yourTurn, boardState, onMove}) {
   const [selectedSquare, setSelectedSquare] = useState(null);
-
   const handleSquareClick = (row, col) => {
+    if (yourTurn){
     const clickedPiece = boardState[row][col];
     if (selectedSquare && !clickedPiece) {
       onMove(selectedSquare, { row, col });
@@ -12,6 +12,7 @@ function Checkerboard({boardState, onMove}) {
     } else if (clickedPiece) {
       setSelectedSquare({ row, col });
     }
+  }
   };
 
   const rows = 8;
@@ -21,7 +22,7 @@ function Checkerboard({boardState, onMove}) {
   for (let i = 0; i < rows; i++) {
     const row = [];
     for (let j = 0; j < cols; j++) {
-      const isWhite = i % 2 === j % 2;
+      const isWhite = (i % 2 === j % 2);
 
       const checkerPieceData = boardState[i][j];
       const checkerPiece = checkerPieceData ? (

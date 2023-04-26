@@ -10,6 +10,8 @@ app.use(express.json());
 const server = http.createServer(app);
 const io = socketio(server);
 var crypto = require('crypto');
+let i=0;
+let matchmaker = [];
 let users=[];
 let profanityArray = ['ass', 'bitch', 'crap','cunt', 'cock', 'dick', 'douche', 'fuck', 'hoe', 'piss', 'shit',
 'wench'];
@@ -33,6 +35,24 @@ db.connect((err) => {
 io.on('connection', socket => {
     console.log('New WS Connection');
     //handle accordingly
+    socket.on('join_matchmaking', (username) => {
+        matchmaker.push({ ID: socket.id, username });
+        if (matchmaker.length >= 2) {
+            i++;
+            const room = `room_${i}`;
+            const player1 = matchmaker.shift();
+            const player2 = matchmaker.shift();
+
+            socket.to(player1.ID).join(room);
+            socket.to(player2.ID).join(room);
+
+            io.to(room).emit('match_found', { player1: player1.username, p1Move:true, player2: player2.username, p2Move:false});
+        }
+      });
+      socket.on("move", (board) => {
+        console.log(Object.keys(io.sockets.adapter.sids[socket.id]));
+        socket.broadcast(room).emit(board);
+      });
 
     socket.on('disconnect', () => {
         //emit
@@ -141,7 +161,7 @@ app.post('/win/:name', (req, res) => {
 
 //Get leaderboard
 app.get("/board", (req, res) => {
-    let sql = `SELECT username FROM users ORDER BY numwins - numlosses desc limit 10`;
+    let sql = `SELECT username, numwins, numlosses FROM users ORDER BY numwins - numlosses desc limit 10`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         console.log(result);

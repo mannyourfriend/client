@@ -32,15 +32,15 @@
   background-color: #fff;
 }
 
-.top10 #first {
+.top10 #row-0 {
   background-color: #ffd700;
 }
 
-.top10 #second {
+.top10 #row-1 {
   background-color: #c0c0c0;
 }
 
-.top10 #third {
+.top10 #row-2 {
   background-color: #cd7f32;
 }
 

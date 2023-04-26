@@ -26,10 +26,10 @@ const Leaderboard = () => {
         </thead>
         <tbody>
           {leaderboardData.map((user, index) => (
-            <tr key={index}>
+            <tr id={`row-${index}`}>
               <td>{user.username}</td>
-              <td>{user.wins}</td>
-              <td>{user.losses}</td>
+              <td>{user.numwins}</td>
+              <td>{user.numlosses}</td>
             </tr>
           ))}
         </tbody>
