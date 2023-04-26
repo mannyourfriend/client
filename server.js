@@ -1,16 +1,20 @@
 //Configure Express
 const express = require('express');
-const app = express();
 const mysql = require('mysql');
+const path = require('path');
+const socketio = require('socket.io');
 const PORT = 5000;
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 
+//Create a connection and connect to MySQL
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'sqlcahnaus',
     password: 'WatchAndra4880',
     database: 'checkers'
 })
-
 db.connect((err) => {
     if (err) {
         console.log("Connection error");
@@ -19,9 +23,15 @@ db.connect((err) => {
     console.log("MySQL connected")
 })
 
-//Body Parser Middleware
-app.use(express.json());
-app.use(express.urlencoded({extended: false}))
+//Socket.io
+io.on('connection', socket => {
+    console.log('New WS Connection');
+    //handle accordingly
+
+    socket.on('disconnect', () => {
+        //emit
+    });
+});
 
 app.get('/', (req, res) => {
     res.send('Hello World');
